@@ -1,0 +1,16 @@
+Downloader
+
+-class connection
+-Descarga
+
+
+
+Saver
+-Document class (Document and metadatos)
+-El saver en si que guarde tanto el documento como los metadatos en un json
+
+
+TaskScheduler
+-Una clase scheduler abstract y el scheduler para gutenberg
+
+Inverted Index
