@@ -12,7 +12,7 @@ public class Checker {
         this.path = path;
     }
 
-    public ArrayList<String> documents_checker(){
+    public ArrayList<String> documents_checker() throws Exception {
 
         File dir = new File(this.path+"Documents/");
         File[] directoryListing = dir.listFiles();
@@ -21,7 +21,7 @@ public class Checker {
                 documents.add((child.getName()));
             }
         } else {
-            System.out.println("There are no Documents or Path is not correct.");
+            throw new Exception("There are no Documents or Path is not correct.");
         }
         return documents;
     }
