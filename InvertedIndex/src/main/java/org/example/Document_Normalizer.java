@@ -22,10 +22,9 @@ public class Document_Normalizer {
 
     public HashMap<String, Set<Integer>> Stopwords_Deleter(List<String> LinesList) throws IOException {
 
-        String StopwordsText = new String(Files.readAllBytes(Paths.get(this.path+"En_stopwords2.txt")));
+        String StopwordsText = new String(Files.readAllBytes(Paths.get(this.path+"English_stopwords.txt")));
         String[] stopwords = StopwordsText.split(",");
         Set<String> StopwordsSet = new HashSet<String>(Arrays.asList(stopwords));
-        System.out.println(LinesList.get(4551));
         HashMap<String, Set<Integer>> map = new HashMap<String, Set<Integer>>();
         int line = 1;
         for (String cadena: LinesList) {
