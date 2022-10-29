@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,99 +19,50 @@ public class Document_indexer {
 
     public void Indexer(HashMap<String, Set<Integer>> Document_map, String doc, String path) throws JsonProcessingException {
 
-        HashMap<String, Set<Integer>> mape = new HashMap<>();
-        HashMap<String, Set<Integer>> mape2 = new HashMap<>();
-        Set<Integer> list = new HashSet<>();
-        list.add(1);
-        list.add(1);
+        String jsonPath = path+"Inv_Index.json";
 
-        mape.put("68978-0.txt", list);
-        mape2.put("doc2", list);
+        File_Reader fr = new File_Reader();
+        File file = new File(jsonPath);
+        String content = fr.Read_File(file);
+        if (content.isEmpty()){
+            JSONObject json = new JSONObject();
+            for (String key : Document_map.keySet()) {
+                HashMap<String, List<Integer>> DOC_LINES = DOC_LINES_relation_creator(Document_map,key,doc);
+                json.append(key, DOC_LINES);
 
-//        JSONObject json = new JSONObject();
-//        json.append("guarde", mape);
-//        json.append("dog", mape2);
-
-
-        JsonObject prueba = new JsonObject();
-
-
-        String resourceName = path+"Inv_Index.json";
-
-        File file = new File(resourceName);
-        try {
-            String content = new String(Files.readAllBytes(Paths.get(file.toURI())));
-            if (content.isEmpty()){
-                JSONObject json_empty = new JSONObject();
-                for (String key : Document_map.keySet()) {
-                    HashMap<String, List<Integer>> DOC_VALUE = new HashMap<>();
-                    List<Integer> list2 = new ArrayList<>();
-                    list2.addAll(Document_map.get(key));
-                    Collections.sort(list2);
-                    DOC_VALUE.put(doc, list2);
-                    json_empty.append(key, DOC_VALUE);
-                    //escribir
-                }
-            } else {
-                JSONObject json = new JSONObject(content);
-                for (String key : Document_map.keySet()) {
-                    HashMap<String, List<Integer>> DOC_VALUE = new HashMap<>();
-                    List<Integer> list2 = new ArrayList<>();
-                    list2.addAll(Document_map.get(key));
-                    Collections.sort(list2);
-                    DOC_VALUE.put(doc, list2);
-
-                    if (json.has(key)) {
-                        if (json.get(key).toString().contains(doc)) {
-                            for(Integer index = 0; index<json.getJSONArray(key).length(); index++){
-                                if (json.getJSONArray(key).get(index).toString().contains(doc)){
-                                    json.getJSONArray(key).remove(index);
-                                }
-                                json.append(key, DOC_VALUE);
-                            }
-                        } else {
-                            json.append(key, DOC_VALUE);
-                        }
-                    }else {
-                        json.append(key, DOC_VALUE);
-                    }
-                }
-                System.out.println(json);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            File_Writer fw = new File_Writer();
+            fw.Json_writer(json,jsonPath);
+        } else {
+            JSONObject json = new JSONObject(content);
+            for (String key : Document_map.keySet()) {
+                HashMap<String, List<Integer>> DOC_LINES = DOC_LINES_relation_creator(Document_map,key,doc);
+                 if (json.has(key)) {
+                     if (json.get(key).toString().contains(doc)) {
+                         for(Integer index = 0; index<json.getJSONArray(key).length(); index++){
+                             if (json.getJSONArray(key).get(index).toString().contains(doc)){
+                                 json.getJSONArray(key).remove(index);
+                             }
+                         }
+                         json.append(key, DOC_LINES);
+                     } else {
+                         json.append(key, DOC_LINES);
+                     }
+                 }else {
+                     json.append(key, DOC_LINES);
+                 }
+            }
+            File_Writer fw = new File_Writer();
+            fw.Json_writer(json,jsonPath);
         }
-
-
-
-
-
-//        System.out.println(json);
-//        for (String key : Document_map.keySet()) {
-//            HashMap<String, List<Integer>> DOC_VALUE = new HashMap<>();
-//            List<Integer> list2 = new ArrayList<>();
-//            list2.addAll(Document_map.get(key));
-//            Collections.sort(list2);
-//            DOC_VALUE.put(doc, list2);
-//
-//            if (json.has(key)) {
-//                if (json.get(key).toString().contains(doc)) {
-//                    for(Integer index = 0; index<json.getJSONArray(key).length(); index++){
-//                        if (json.getJSONArray(key).get(index).toString().contains(doc)){
-//                            json.getJSONArray(key).remove(index);
-//                        }
-//                        json.append(key, DOC_VALUE);
-//                    }
-//                } else {
-//                    json.append(key, DOC_VALUE);
-//                }
-//            }else{
-//                json.append(key, DOC_VALUE);
-//            }
-//            System.out.println(json);
-//            break;
-//        }
-
+    }
+    public HashMap<String,List<Integer>> DOC_LINES_relation_creator(HashMap<String, Set<Integer>> Document_map,String key,String doc){
+        HashMap<String, List<Integer>> DOC_LINES = new HashMap<>();
+        List<Integer> list2 = new ArrayList<>();
+        list2.addAll(Document_map.get(key));
+        Collections.sort(list2);
+        DOC_LINES.put(doc, list2);
+        return DOC_LINES;
     }
 
 

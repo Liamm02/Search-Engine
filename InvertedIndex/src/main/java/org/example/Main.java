@@ -1,14 +1,4 @@
 package org.example;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.*;
 
 public class Main {
@@ -16,15 +6,20 @@ public class Main {
         String path = "./src/main/resources/";
         Checker checker = new Checker(path);
         ArrayList<String> documents = checker.documents_checker();
-        checker.Indices_Folder_Checker();
+        ArrayList<String> MetaData_documents = checker.MetaData_checker();
+        checker.Inv_Index_checker();
 
-        Document_Normalizer dn = new Document_Normalizer(path);
-        List<String> text = dn.Translator(documents.get(2));
+        for (String name: documents){
+            System.out.println("Indexing document: "+name);
+            Document doc = new Document(name,path);
+            doc.ReadMetada();
+            Document_Normalizer dn = new Document_Normalizer(path);
+            List<String> text = dn.Translator(name);
 
-        HashMap<String, Set<Integer>> Doc_InvertedIndex = dn.Stopwords_Deleter(text);
-        Document_indexer di = new Document_indexer();
-        di.Indexer(Doc_InvertedIndex,documents.get(2),path);
+            HashMap<String, Set<Integer>> Doc_InvertedIndex = dn.Stopwords_Deleter(text,doc.Language);
+            Document_indexer di = new Document_indexer();
+            di.Indexer(Doc_InvertedIndex,name,path);
 
-
+        }
     }
 }
