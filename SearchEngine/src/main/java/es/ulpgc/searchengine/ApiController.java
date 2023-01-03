@@ -7,10 +7,12 @@ import java.io.IOException;
 import java.util.*;
 
 import static spark.Spark.get;
+import static spark.Spark.port;
 
 public class ApiController {
 
     public static void getParams() {
+        port(8080);
         Map<String, String> queryParams = new HashMap<>();
         get("/documents/:words", (req, res) -> {
             Set<String> allParams = req.queryParams();
@@ -30,7 +32,7 @@ public class ApiController {
             String type = req.params("type");
 
             if (type.equalsIgnoreCase("oldestbook")){
-                return Stats.getOldestBook("./Datamart/MetaData/");
+                return Stats.getOldestBook();
 
             }
             if (type.equalsIgnoreCase("mostcommonword")){
