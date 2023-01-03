@@ -12,6 +12,9 @@ public class JoinJson {
 
 
     public static String Join(List<String> docs) throws IOException {
+        if (docs.isEmpty()){
+            return "{}";
+        }
         StringBuilder result = new StringBuilder();
         result.append("{");
         for (String doc: docs){
