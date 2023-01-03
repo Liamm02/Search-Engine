@@ -23,7 +23,7 @@ The *API* module handles requests that are delivered to the system through the c
 
 The engine in it's final state, is deployed into a docker container, to solve *scalability*. As well as a cluster is built with the following containers to distribute the load of tasks to various systems using Load Balancer with Nginx, this in in turn solves the problem of *availability*.
 
-## Docker Deployment <img src="https://user-images.githubusercontent.com/92883393/210415818-bd1c73b0-4844-42a2-ade0-0800e6d37fad.png" width="40">
+## Docker Deployment <img src="https://user-images.githubusercontent.com/92883393/210415818-bd1c73b0-4844-42a2-ade0-0800e6d37fad.png" width="60">
 
 The Docker image is to be created when a JAR of the project is built, the manifest file specifies the right path for the main class and when the Dockerfile has the right commands to compile the project with all of it's dependencies into an image. 
 Within a container, the image is then posteriorly executed, either through the command line, Docker Desktop or even with the Docker plugin in Intellij.
