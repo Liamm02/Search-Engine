@@ -5,5 +5,5 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public interface Finder {
-    public ArrayList<String> findCoincidences();
+    ArrayList<String> findCoincidences();
 }
