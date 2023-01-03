@@ -25,6 +25,7 @@ The engine in it's final state, is deployed into a docker container, to solve *s
 
 ## Docker Deployment 
 ![docker_3](https://user-images.githubusercontent.com/92883393/210415818-bd1c73b0-4844-42a2-ade0-0800e6d37fad.png)
+<img src="https://user-images.githubusercontent.com/92883393/210415818-bd1c73b0-4844-42a2-ade0-0800e6d37fad.png" width="600">
 
 The Docker image is to be created when a JAR of the project is built, the manifest file specifies the right path for the main class and when the Dockerfile has the right commands to compile the project with all of it's dependencies into an image. 
 Within a container, the image is then posteriorly executed, either through the command line, Docker Desktop or even with the Docker plugin in Intellij.
