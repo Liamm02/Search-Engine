@@ -40,7 +40,6 @@ public class MetadataFinder implements Finder {
 
     }
     private boolean throwCheckers(String docPath) throws IOException {
-//        System.out.println(checkDate(docPath, metadata));
         return checkDate(docPath) && checkAuthor(docPath);
     }
 
