@@ -6,10 +6,10 @@ public class FileSearcher {
 
     public static File searchFile(File dir, String name){
         File result = null;
-        File[] dirlist  = dir.listFiles();
+        File[] dirList  = dir.listFiles();
 
-        assert dirlist != null;
-        for (File file : dirlist) {
+        assert dirList != null;
+        for (File file : dirList) {
             if (file.isDirectory()) {
                 result = searchFile(file, name);
                 if (result != null) break;
