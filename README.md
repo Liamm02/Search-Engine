@@ -1,5 +1,6 @@
 # Search Engine
-Full implementation of a search engine using an inverted index structure,as well as creating an image of the entire project using Docker and implementing Load Balancer with Nginx.
+Full implementation of a search engine using an inverted index structure, as well as creating an image of the entire project using Docker and implementing Load Balancer with Nginx.
+
 ## Overview 📋
 The code comprises of the following architecture:
 
@@ -10,7 +11,6 @@ The code comprises of the following architecture:
 * Stopwords folder, containing all stopwords stored in text files in three different languages; Spanish, English and French.
 
 * A query engine that publishes an API for receiving search requests from users.
-
 
 ## The code 🔧
 *Java 11 and json are pre-requirements for the execution of this project*
