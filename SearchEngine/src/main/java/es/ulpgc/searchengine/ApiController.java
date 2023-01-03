@@ -26,19 +26,15 @@ public class ApiController {
     }
 
     public static void getStats() {
-        Map<String,Integer> result = new HashMap<>();
         get("/stats/:type", (req, res) -> {
             String type = req.params("type");
-            Stats stats = new Stats();
-//            if (type.equalsIgnoreCase("authorwithmorebooks")){
-//                getAuthor_with_more_books();
-//            }
+
             if (type.equalsIgnoreCase("oldestbook")){
-                return stats.getOldestBook("./Datamart/MetaData/");
+                return Stats.getOldestBook("./Datamart/MetaData/");
 
             }
             if (type.equalsIgnoreCase("mostcommonword")){
-                return stats.getMostCommonWord();
+                return Stats.getMostCommonWord();
             }
             return null;
         });
